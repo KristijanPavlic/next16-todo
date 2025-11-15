@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
+import { Navigation } from "./components/Navigation"
 import "./globals.css"
 
 const geistSans = Geist({
@@ -13,8 +14,8 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Next 16 To-Do",
-  description: "Simple SPA To-Do app demo (Next 16 + React 19)",
+  title: "Next 16 App",
+  description: "To-Do and Event Management App (Next 16 + React 19)",
 }
 
 export default function RootLayout({
@@ -27,6 +28,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Navigation />
         {children}
       </body>
     </html>
