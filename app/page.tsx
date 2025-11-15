@@ -24,16 +24,19 @@ export default function HomePage() {
   }, []) // Empty dependency array is safe with useEffectEvent
 
   return (
-    <main className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-xl space-y-6">
-        <header className="space-y-1 select-none">
-          <h1 className="text-3xl font-semibold tracking-tight">
-            Next 16 To-Do
-          </h1>
-          <span className="text-sm text-slate-300">
-            SPA demo - JSONPlaceholder, React 19 (useEffectEvent, transition)
-          </span>
-        </header>
+    <main className="min-h-screen bg-linear-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center p-4 pt-20">
+      <div className="relative">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-sky-900/20 via-transparent to-transparent"></div>
+        
+        <div className="relative w-full max-w-xl space-y-6">
+          <header className="space-y-1 select-none text-center">
+            <h1 className="text-3xl font-semibold tracking-tight text-white">
+              Next 16 To-Do
+            </h1>
+            <span className="text-sm text-slate-300">
+              SPA demo - JSONPlaceholder, React 19 (useEffectEvent, transition)
+            </span>
+          </header>
 
         <section className="bg-slate-800/70 border border-slate-700 rounded-2xl p-4 shadow-lg space-y-4">
           <TodoForm onSubmit={addTodo} isPending={isPending} error={error} />
@@ -45,13 +48,13 @@ export default function HomePage() {
             {isLoading && (
               <div className="flex items-center gap-1.5">
                 <div className="size-3 shrink-0 border border-slate-400 border-t-transparent rounded-full animate-spin"></div>
-                <span>Loading todos...</span>
+                <span>Loading todos</span>
               </div>
             )}
             {isPending && !isLoading && (
               <div className="flex items-center gap-1.5">
                 <div className="size-3 shrink-0 border border-slate-400 border-t-transparent rounded-full animate-spin"></div>
-                <span>Saving changes...</span>
+                <span>Saving changes</span>
               </div>
             )}
           </div>
@@ -64,6 +67,7 @@ export default function HomePage() {
           />
         </section>
       </div>
-    </main>
+    </div>
+  </main>
   )
 }
