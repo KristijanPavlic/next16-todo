@@ -30,7 +30,7 @@ export default function HomePage() {
         
         <div className="relative w-full max-w-xl space-y-6">
           <header className="space-y-1 select-none text-center">
-            <h1 className="text-3xl font-semibold tracking-tight text-white">
+            <h1 className="text-3xl font-semibold tracking-tight text-white mt-10">
               Next 16 To-Do
             </h1>
             <span className="text-sm text-slate-300">

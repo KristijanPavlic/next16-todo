@@ -31,7 +31,7 @@ export function Navigation() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm text-nowrap font-medium transition-all duration-200 ${
                 item.active
                   ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/25'
                   : 'text-slate-300 hover:text-white hover:bg-slate-800'

@@ -69,34 +69,25 @@ export function EventForm({ onSubmit, isPending, error }: EventFormProps) {
 
   const [priceDisplay, setPriceDisplay] = useState("0,00")
 
-  const handlePriceKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Backspace") {
-      e.preventDefault()
+  const updatePrice = (digits: string) => {
+    const paddedValue = digits.padStart(3, "0")
+    const euros = paddedValue.slice(0, -2).replace(/^0+/, "") || "0"
+    const cents = paddedValue.slice(-2)
+    const formatted = euros + "," + cents
+    setPriceDisplay(formatted)
+    
+    const numericValue = parseFloat(euros + "." + cents)
+    reset({ ...watch(), ticketPrice: numericValue })
+  }
 
-      const currentValue = priceDisplay.replace(",", "")
-      const newValue = currentValue.slice(0, -1) || "0"
-      const paddedValue = newValue.padStart(3, "0")
-      const euros = paddedValue.slice(0, -2).replace(/^0+/, "") || "0"
-      const cents = paddedValue.slice(-2)
-      const formatted = euros + "," + cents
-
-      setPriceDisplay(formatted)
-      
-      const numericValue = parseFloat(euros + "." + cents)
-      reset({ ...watch(), ticketPrice: numericValue })
-    } else if (/^\d$/.test(e.key)) {
-      e.preventDefault()
-      const currentValue = priceDisplay.replace(",", "")
-      const newValue = (currentValue + e.key).replace(/^0+/, "") || "0"
-      const paddedValue = newValue.padStart(3, "0")
-      const euros = paddedValue.slice(0, -2).replace(/^0+/, "") || "0"
-      const cents = paddedValue.slice(-2)
-      const formatted = euros + "," + cents
-
-      setPriceDisplay(formatted)
-      
-      const numericValue = parseFloat(euros + "." + cents)
-      reset({ ...watch(), ticketPrice: numericValue })
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value
+    const digitsOnly = input.replace(/[^\d]/g, "")
+    
+    if (digitsOnly === "") {
+      updatePrice("0")
+    } else {
+      updatePrice(digitsOnly)
     }
   }
 
@@ -323,10 +314,10 @@ export function EventForm({ onSubmit, isPending, error }: EventFormProps) {
                 </label>
                 <input
                   type="text"
+                  inputMode="numeric"
                   id="ticketPrice"
                   value={priceDisplay}
-                  onKeyDown={handlePriceKeyDown}
-                  onChange={() => {}}
+                  onChange={handlePriceChange}
                   className="w-full rounded-xl bg-slate-800/70 border border-slate-600 h-9 px-4 py-3 text-white outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 transition-colors"
                 />
                 {errors.ticketPrice && (
